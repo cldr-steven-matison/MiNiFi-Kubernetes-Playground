@@ -1,3 +1,8 @@
+# ClouderaStreamingOperators
+This reposistory is used in installing [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/).
+
+# MiNiFi-Kubernetes-Playground
+
 This guide provides a definitive, "Clean Slate" workflow for iterating on **Apache MiNiFi C++ (v1.26.02)** within a **Minikube** environment on **macOS**. 
 
 It eliminates common caching "ghosts" by building images directly inside the Minikube Docker daemon and ensures the MiNiFi C++ agent's strict YAML requirements are met.
