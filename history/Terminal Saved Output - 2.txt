@@ -1,0 +1,200 @@
+Last login: Mon Mar 30 13:32:42 on ttys000
+steven.matison@FTF3XR2065 minifi % curl -i -X POST http://127.0.0.1:52106/test \
+     -H "Content-Type: application/json" \
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+curl: (56) Recv failure: Connection reset by peer
+steven.matison@FTF3XR2065 minifi % curl -i -X POST http://127.0.0.1:52106/test \
+     -H "Content-Type: application/json" \
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+curl: (7) Failed to connect to 127.0.0.1 port 52106 after 0 ms: Couldn't connect to server
+steven.matison@FTF3XR2065 minifi % kubectl logs -f deployment/minifi-test
+[2026-03-31 14:32:36.755] [main] [info] Found MINIFI_HOME=/opt/minifi/nifi-minifi-cpp-1.26.02 in environment
+[2026-03-31 14:32:36.757] [main] [info] MiNiFi Locations=
+Working dir:             /opt/minifi/nifi-minifi-cpp-1.26.02
+Lock path:               /opt/minifi/nifi-minifi-cpp-1.26.02/LOCK
+Log properties path:     /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi-log.properties
+UID properties path:     /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi-uid.properties
+Properties path:         /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi.properties
+Logs dir:                /opt/minifi/nifi-minifi-cpp-1.26.02/logs
+Fips binary path:        /opt/minifi/nifi-minifi-cpp-1.26.02/fips
+Fips conf path:          /opt/minifi/nifi-minifi-cpp-1.26.02/fips
+[2026-03-31 14:32:36.760] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for Logger properties from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi-log.properties (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi-log.properties)
+[2026-03-31 14:32:36.764] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for UID properties from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi-uid.properties (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi-uid.properties)
+[2026-03-31 14:32:36.765] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.765] [main] [info] No encryption key found, will not decrypt sensitive properties in the configuration
+[2026-03-31 14:32:36.765] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for MiNiFi configuration from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi.properties (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/minifi.properties)
+[2026-03-31 14:32:36.766] [main] [info] FIPS mode is disabled. FIPS configs and modules will NOT be loaded.
+[2026-03-31 14:32:36.879] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.879] [org::apache::nifi::minifi::utils::crypto::EncryptionManager] [info] No encryption key found for 'nifi.flowfile.repository.encryption.key'
+[2026-03-31 14:32:36.879] [org::apache::nifi::minifi::core::repository::FlowFileRepository] [info] Using plaintext FlowFileRepository
+[2026-03-31 14:32:36.879] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Acquiring database handle '/opt/minifi/nifi-minifi-cpp-1.26.02/flowfile_repository'
+[2026-03-31 14:32:36.879] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Simple directory detected '/opt/minifi/nifi-minifi-cpp-1.26.02/flowfile_repository', using as is
+[2026-03-31 14:32:36.879] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Opening rocksdb database '/opt/minifi/nifi-minifi-cpp-1.26.02/flowfile_repository'
+[2026-03-31 14:32:36.943] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.943] [org::apache::nifi::minifi::utils::crypto::EncryptionManager] [info] No encryption key found for 'nifi.database.content.repository.encryption.key'
+[2026-03-31 14:32:36.943] [org::apache::nifi::minifi::core::repository::DatabaseContentRepository] [info] Using plaintext DatabaseContentRepository
+[2026-03-31 14:32:36.943] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Acquiring database handle '/opt/minifi/nifi-minifi-cpp-1.26.02/content_repository'
+[2026-03-31 14:32:36.943] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Simple directory detected '/opt/minifi/nifi-minifi-cpp-1.26.02/content_repository', using as is
+[2026-03-31 14:32:36.943] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Opening rocksdb database '/opt/minifi/nifi-minifi-cpp-1.26.02/content_repository'
+[2026-03-31 14:32:36.950] [main] [info] setting default dir to /opt/minifi/nifi-minifi-cpp-1.26.02/content_repository
+[2026-03-31 14:32:36.950] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.953] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.953] [org::apache::nifi::minifi::utils::crypto::EncryptionManager] [info] Generating encryption key for 'nifi.bootstrap.sensitive.properties.key'
+[2026-03-31 14:32:36.953] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.954] [org::apache::nifi::minifi::Properties] [info] Persisted /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf
+[2026-03-31 14:32:36.956] [main] [info] Loading FlowController
+[2026-03-31 14:32:36.957] [org::apache::nifi::minifi::FlowController] [info] Instantiating new flow
+[2026-03-31 14:32:36.967] [org::apache::nifi::minifi::core::YamlConfiguration] [info] Using default value for optional field 'scheduling strategy'' in component named 'ListenHTTP' [in '/Processors/0' section of configuration file]: TIMER_DRIVEN
+[2026-03-31 14:32:36.967] [org::apache::nifi::minifi::core::YamlConfiguration] [info] Using default value for optional field 'scheduling period'' in component named 'ListenHTTP' [in '/Processors/0' section of configuration file]: 1 sec
+[2026-03-31 14:32:36.971] [org::apache::nifi::minifi::core::YamlConfiguration] [info] Using default value for optional field 'scheduling strategy'' in component named 'PublishKafka' [in '/Processors/1' section of configuration file]: TIMER_DRIVEN
+[2026-03-31 14:32:36.971] [org::apache::nifi::minifi::core::YamlConfiguration] [info] Using default value for optional field 'scheduling period'' in component named 'PublishKafka' [in '/Processors/1' section of configuration file]: 1 sec
+[2026-03-31 14:32:36.971] [org::apache::nifi::minifi::core::YamlConfiguration] [info] Using default value for optional field 'scheduling strategy'' in component named 'DebugLog' [in '/Processors/2' section of configuration file]: TIMER_DRIVEN
+[2026-03-31 14:32:36.971] [org::apache::nifi::minifi::core::YamlConfiguration] [info] Using default value for optional field 'scheduling period'' in component named 'DebugLog' [in '/Processors/2' section of configuration file]: 1 sec
+[2026-03-31 14:32:36.978] [org::apache::nifi::minifi::core::FlowConfiguration] [info] Successfully updated the flow configuration file /opt/minifi/nifi-minifi-cpp-1.26.02/conf/config.yml
+[2026-03-31 14:32:36.979] [org::apache::nifi::minifi::FlowController] [info] Loaded root processor Group
+[2026-03-31 14:32:36.979] [org::apache::nifi::minifi::FlowController] [info] Initializing timers
+[2026-03-31 14:32:36.979] [org::apache::nifi::minifi::utils::ThreadPool] [info] Could not find a ThreadPoolManager service
+[2026-03-31 14:32:36.982] [org::apache::nifi::minifi::FlowController] [info] Loaded controller service provider
+[2026-03-31 14:32:36.982] [org::apache::nifi::minifi::FlowController] [info] Reset content repository
+[2026-03-31 14:32:36.982] [org::apache::nifi::minifi::core::repository::FlowFileRepository] [info] Reading existing flow files from database
+[2026-03-31 14:32:36.985] [org::apache::nifi::minifi::FlowController] [info] Loaded flow repository
+[2026-03-31 14:32:36.985] [org::apache::nifi::minifi::FlowController] [info] Starting Flow Controller
+[2026-03-31 14:32:36.985] [org::apache::nifi::minifi::core::controller::StandardControllerServiceProvider] [info] Enabling 0 controller services
+[2026-03-31 14:32:36.988] [org::apache::nifi::minifi::controllers::RocksDbStateStorage] [info] Always Persist property: false
+[2026-03-31 14:32:36.988] [org::apache::nifi::minifi::controllers::RocksDbStateStorage] [info] Auto Persistence Interval property: 60000ms
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::utils::crypto::EncryptionManager] [info] No encryption key found for 'nifi.state.storage.local.encryption.key'
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::Properties] [info] Using configuration file to load configuration for  from /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf (located at /opt/minifi/nifi-minifi-cpp-1.26.02/conf/bootstrap.conf)
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::utils::crypto::EncryptionManager] [info] No encryption key found for 'nifi.state.management.provider.local.encryption.key'
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::controllers::RocksDbStateStorage] [info] Using plaintext RocksDbStateStorage
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Acquiring database handle 'corecomponentstate'
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Simple directory detected 'corecomponentstate', using as is
+[2026-03-31 14:32:36.989] [org::apache::nifi::minifi::internal::RocksDatabase] [info] Opening rocksdb database 'corecomponentstate'
+[2026-03-31 14:32:36.996] [org::apache::nifi::minifi::processors::ListenHTTP] [info] ListenHTTP starting HTTP server on port 8080 and path /contentListener with 1 threads (489c62c4-2d12-11f1-baac-62f0ccd85bcd)
+[2026-03-31 14:32:37.005] [org::apache::nifi::minifi::processors::PublishKafka] [info] PublishKafka registering 0 librdkafka dynamic properties (489c62c6-2d12-11f1-baac-62f0ccd85bcd)
+[2026-03-31 14:32:37.020] [org::apache::nifi::minifi::FlowController] [info] Started Flow Controller
+[2026-03-31 14:32:37.021] [main] [info] MiNiFi started
+^C%                                                                                                                                                 steven.matison@FTF3XR2065 minifi % minikube service minifi-test-service --url
+http://127.0.0.1:53064
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+^C%                                                                                                                                                 steven.matison@FTF3XR2065 minifi % minikube service minifi-test-service --url
+http://127.0.0.1:53069
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+^C%                                                                                                                                                 steven.matison@FTF3XR2065 minifi % curl -i -X POST http://127.0.0.1:53074/test \
+     -H "Content-Type: application/json" \
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+\curl: (56) Recv failure: Connection reset by peer
+steven.matison@FTF3XR2065 minifi % curl -i -X POST http://127.0.0.1:53314/test \
+     -H "Content-Type: application/json" \
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+HTTP/1.1 404 Not Found
+Cache-Control: no-cache, no-store, must-revalidate, private, max-age=0
+Expires: 0
+Pragma: no-cache
+Content-Type: text/plain; charset=utf-8
+Date: Tue, 31 Mar 2026 14:47:46 GMT
+Connection: close
+
+Error 404: Not Found
+Not Found%                                                                                                                                          steven.matison@FTF3XR2065 minifi % # Replace the port with whatever Tab #1 gave you
+curl -i -X POST http://127.0.0.1:53074/contentListener \
+     -H "Content-Type: application/json" \
+     -d '{"test_id": "macbook-smoke-final", "message": "Ready and Waiting"}'
+zsh: command not found: #
+curl: (7) Failed to connect to 127.0.0.1 port 53074 after 0 ms: Couldn't connect to server
+steven.matison@FTF3XR2065 minifi % # Replace the port with whatever Tab #1 gave you
+curl -i -X POST http://127.0.0.1:53314/contentListener \
+     -H "Content-Type: application/json" \
+     -d '{"test_id": "macbook-smoke-final", "message": "Ready and Waiting"}'
+zsh: command not found: #
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Content-length: 0
+
+steven.matison@FTF3XR2065 minifi % kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+total 0      
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968423264297379
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968428269618048
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968433274609967
+steven.matison@FTF3XR2065 minifi % kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+total 0      
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968423264297379
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968428269618048
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968433274609967
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968436276709051
+-rw-r--r--    1 root     root           0 Mar 31 14:49 1774968438278686719
+steven.matison@FTF3XR2065 minifi % kubectl run kafka-consumer -it --rm \
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \
+  --restart=Never \
+  -- bin/kafka-console-consumer.sh \
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \
+  --topic test-minifi \
+  --from-beginning
+^C%                                                                                                                                                 steven.matison@FTF3XR2065 minifi % # Check the local 'PutFile' output
+kubectl exec -it deployment/minifi-test -- /bin/sh -c "cat /tmp/minifi-test-output/*"
+zsh: command not found: #
+steven.matison@FTF3XR2065 minifi % kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+total 0      
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968423264297379
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968428269618048
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968433274609967
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968436276709051
+-rw-r--r--    1 root     root           0 Mar 31 14:49 1774968438278686719
+-rw-r--r--    1 root     root           0 Mar 31 14:49 1774968443283573763
+-rw-r--r--    1 root     root           0 Mar 31 14:50 1774968446286969292
+-rw-r--r--    1 root     root           0 Mar 31 14:50 1774968448290201168
+steven.matison@FTF3XR2065 minifi % kubectl run kafka-list-topics -it --rm \
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \
+  --restart=Never \
+  -- bin/kafka-topics.sh \
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \
+  --list
+All commands and output from this session will be recorded in container logs, including credentials and sensitive information passed through the command prompt.
+If you don't see a command prompt, try pressing enter.
+__consumer_offsets
+__ssb_sample_ea24eadc-0bbc-4d54-a2c7-212f0211d801
+__surveyor_topic_configs
+__transaction_state
+test-minifi
+txn1
+pod "kafka-list-topics" deleted from default namespace
+steven.matison@FTF3XR2065 minifi % kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+total 0      
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968423264297379
+-rw-r--r--    1 root     root           0 Mar 31 14:47 1774968428269618048
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968433274609967
+-rw-r--r--    1 root     root           0 Mar 31 14:48 1774968436276709051
+-rw-r--r--    1 root     root           0 Mar 31 14:49 1774968438278686719
+-rw-r--r--    1 root     root           0 Mar 31 14:49 1774968443283573763
+-rw-r--r--    1 root     root           0 Mar 31 14:50 1774968446286969292
+-rw-r--r--    1 root     root           0 Mar 31 14:50 1774968448290201168
+-rw-r--r--    1 root     root           0 Mar 31 14:51 1774968453295211462
+-rw-r--r--    1 root     root           0 Mar 31 14:52 1774968456298547505
+steven.matison@FTF3XR2065 minifi % kubectl run kafka-offset-check -it --rm \
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \
+  --restart=Never \
+  -- bin/kafka-run-class.sh kafka.tools.GetOffsetShell \
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \
+  --topic test-minifi --time -1
+All commands and output from this session will be recorded in container logs, including credentials and sensitive information passed through the command prompt.
+If you don't see a command prompt, try pressing enter.
+pod "kafka-offset-check" deleted from default namespace
+pod default/kafka-offset-check terminated (Error)
+steven.matison@FTF3XR2065 minifi % kubectl run kafka-live-view -it --rm \
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \
+  --restart=Never \
+  -- bin/kafka-console-consumer.sh \
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \
+  --topic test-minifi \
+  --from-beginning \
+  --timeout-ms 10000
+All commands and output from this session will be recorded in container logs, including credentials and sensitive information passed through the command prompt.
+If you don't see a command prompt, try pressing enter.
+{"test_id": "macbook-smoke-final", "message": "Ready and Waiting"}
+{"test_id": "macbook-smoke-final", "message": "Ready and Waiting"}
+[2026-03-31 14:54:11,100] ERROR Error processing message, terminating consumer process:  (kafka.tools.ConsoleConsumer$)
+org.apache.kafka.common.errors.TimeoutException
+Processed a total of 2 messages
+pod "kafka-live-view" deleted from default namespace
+steven.matison@FTF3XR2065 minifi % 

@@ -1,0 +1,39 @@
+Flow Controller:
+  name: MiNiFi HTTP to Kafka
+
+Processors:
+- name: ListenHTTP
+  id: 489c62c4-2d12-11f1-baac-62f0ccd85bcd
+  class: ListenHTTP
+  Properties:
+    Listening Port: 8080
+
+- name: PublishKafka
+  id: 489c62c6-2d12-11f1-baac-62f0ccd85bcd
+  class: PublishKafka
+  Properties:
+    Known Brokers: my-cluster-kafka-bootstrap.cld-streaming.svc:9092
+    Topic Name: test-minifi
+    Client Name: minifi-test-client
+    Batch Size: '10'
+
+- name: DebugLog
+  id: 489c62c7-2d12-11f1-baac-62f0ccd85bcd
+  class: PutFile
+  Properties:
+    Directory: /tmp/minifi-test-output
+
+Connections:
+- name: HttpToKafka
+  id: 489c62c8-2d12-11f1-baac-62f0ccd85bcd
+  source name: ListenHTTP
+  destination name: PublishKafka
+  source relationship name: success
+
+- name: HttpToLog
+  id: 489c62ca-2d12-11f1-baac-62f0ccd85bcd
+  source name: ListenHTTP
+  destination name: DebugLog
+  source relationship name: success
+
+Remote Processing Groups: []

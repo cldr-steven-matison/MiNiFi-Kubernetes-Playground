@@ -1,0 +1,300 @@
+curl -i -X POST http://127.0.0.1:52106/test \\
+     -H "Content-Type: application/json" \\
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+curl -i -X POST http://127.0.0.1:52106/test \\
+     -H "Content-Type: application/json" \\
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+kubectl logs -f deployment/minifi-test
+minikube service minifi-test-service --url
+minikube service minifi-test-service --url
+curl -i -X POST http://127.0.0.1:53074/test \\
+     -H "Content-Type: application/json" \\
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+curl -i -X POST http://127.0.0.1:53314/test \\
+     -H "Content-Type: application/json" \\
+     -d '{"test_id": "macbook-smoke-01", "message": "Hello from the host!"}'
+# Replace the port with whatever Tab #1 gave you\
+curl -i -X POST http://127.0.0.1:53074/contentListener \\
+     -H "Content-Type: application/json" \\
+     -d '{"test_id": "macbook-smoke-final", "message": "Ready and Waiting"}'
+# Replace the port with whatever Tab #1 gave you\
+curl -i -X POST http://127.0.0.1:53314/contentListener \\
+     -H "Content-Type: application/json" \\
+     -d '{"test_id": "macbook-smoke-final", "message": "Ready and Waiting"}'
+kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+kubectl run kafka-consumer -it --rm \\
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \\
+  --restart=Never \\
+  -- bin/kafka-console-consumer.sh \\
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \\
+  --topic test-minifi \\
+  --from-beginning
+# Check the local 'PutFile' output\
+kubectl exec -it deployment/minifi-test -- /bin/sh -c "cat /tmp/minifi-test-output/*"
+kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+kubectl run kafka-list-topics -it --rm \\
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \\
+  --restart=Never \\
+  -- bin/kafka-topics.sh \\
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \\
+  --list
+kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+kubectl run kafka-offset-check -it --rm \\
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \\
+  --restart=Never \\
+  -- bin/kafka-run-class.sh kafka.tools.GetOffsetShell \\
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \\
+  --topic test-minifi --time -1
+kubectl run kafka-live-view -it --rm \\
+  --image=quay.io/strimzi/kafka:latest-kafka-3.7.0 \\
+  --restart=Never \\
+  -- bin/kafka-console-consumer.sh \\
+  --bootstrap-server my-cluster-kafka-bootstrap.cld-streaming.svc:9092 \\
+  --topic test-minifi \\
+  --from-beginning \\
+  --timeout-ms 10000
+exit
+cd ~/Documents/GitHub/cldr-steven-matison.github.io 
+bundle exec jekyll build .
+cd ~
+curl -L -k \\
+ -u "22eaa4b8-29d6-4863-b3ab-49a36613bbf4:e3b22b2b-7bb2-4e19-9ec6-5eff6ad5d86c" \\
+ -d accessKey=22eaa4b8-29d6-4863-b3ab-49a36613bbf4 \\
+ -d agentClass=efm-cfm-test \\
+ -d agentIdentifier=fb0f338e-2de4-4865-b2d2-a3f0d8658e59 \\
+ -d agentType=cpp \\
+ -d agentVersion=1.24.12 \\
+ -d autoConfigureSecurity=true \\
+ -d baseUrl=https%3A%2F%2Fgo01-efm--aws-management0.go01-dem.ylcu-atmi.cloudera.site%3A10090%2Fefm%2Fapi \\
+ -d hbPeriod=5000 \\
+ -d osArch=linux \\
+ -d secret=e3b22b2b-7bb2-4e19-9ec6-5eff6ad5d86c \\
+ -d serviceName=minifi \\
+ -d serviceUser=minifi \\
+ -d trustSelfSignedCertificates=true \\
+ https://go01-efm--aws-management0.go01-dem.ylcu-atmi.cloudera.site:10090/efm/api/agent-deployer/script | bash -
+cd ~
+nano Dockerfile.minifi
+nano config.yaml
+nano k8s_minifi_test.py
+docker build -t minifi-test:latest Dockerfile.minifi .
+docker build -t minifi-test:latest Dockerfile.minifi
+minikube start
+docker build -t minifi-test:latest Dockerfile.minifi
+ls
+docker build -t minifi-test:latest Dockerfile.minifi .
+docker build -t minifi-test:latest Dockerfile.minifi .
+mkdir minifi
+mv k8s_minifi_test.py minifi/
+mv config.yaml minifi/
+mv Dockerfile.minifi minifi/
+cd minifi
+docker build -t minifi-test:latest .
+nano Dockerfile.minifi
+mv Dockerfile.minifi Dockerfile
+docker build -t minifi-test:latest .
+docker login container.repo.cloudera.com
+docker build -t minifi-test:latest .
+ls
+nano Dockerfile
+docker build -t minifi-test:latest .
+ls
+mv config.yaml config.yml
+docker build -t minifi-test:latest .
+docker build --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest
+# Create ServiceAccount and permissions\
+kubectl create serviceaccount minifi-controller --dry-run=client -o yaml | kubectl apply -f -\
+kubectl create clusterrolebinding minifi-view --clusterrole=view --serviceaccount=default:minifi-controller --dry-run=client -o yaml | kubectl apply -f -\
+\
+# Deploy the MiNiFi Pod\
+kubectl apply -f minifi-test.yaml
+ls
+minifi-test.yaml
+nano minifi-test.yaml
+kubectl apply -f minifi-test.yaml
+rm -rf minifi-test.yaml
+nano minifi-test.yaml
+kubectl apply -f minifi-test.yaml
+rm -rf minifi-test.yaml
+nano minifi-test.yaml
+kubectl apply -f minifi-test.yaml
+minikube service minifi-test-service --url
+kubectl logs deployment/minifi-test
+kubectl logs minifi-test-5886b5cbb-7bwht --previous
+kubectl logs minifi-test-5886b5cbb-7bwht
+kubeclt describe pod minifi-test-5886b5cbb-7bwht
+kubectl describe pod minifi-test-5886b5cbb-7bwht
+docker build --platform linux/amd64 -t minifi-test:latest .
+ls
+mv k8s_minifi_test.py /k8s_test.py
+docker build --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest
+kubectl delete pod minifi-test-5886b5cbb-7bwht
+kubectl logs minifi-test-5886b5cbb-7svz8
+kubectl logs minifi-test-5886b5cbb-7svz8
+kubectl describe pod minifi-test-5886b5cbb-7svz8
+eval $(minikube docker-env)
+docker build -t minifi-test:v1 .
+docker build --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest.
+minikube image load minifi-test:latest
+kubectl rollout restart deployment/minifi-test
+kubectl describe pod minifi-test-fbbc578dd-xrwkp
+kubectl logs minifi-test-fbbc578dd-xrwkp --previous
+docker run --rm --platform linux/amd64 minifi-test:latest find /opt/minifi -name "*python*"
+docker build --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest --overwrite
+kubectl rollout restart deployment/minifi-test
+kubectl logs minifi-test-8469b4888d-8ztcg --previous
+kubectl describe pod minifi-test-8469b4888d-8ztcg
+kubectl logs minifi-test-8469b4888d-8ztcg
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest --overwrite
+kubectl delete pod -l app=minifi-test
+kubectl logs minifi-test-fbbc578dd-6cpw6
+docker run --rm --platform linux/amd64 minifi-test:latest \\
+/opt/minifi/nifi-minifi-cpp-1.26.02/bin/minifi --manifest | grep -A 1 "name"
+docker run --rm --platform linux/amd64 minifi-test:latest \\
+/bin/sh -c "/opt/minifi/nifi-minifi-cpp-1.26.02/bin/minifi --docs /tmp/docs && ls /tmp/docs/processors"
+docker run --rm --platform linux/amd64 minifi-test:latest \\
+/bin/sh -c "/opt/minifi/nifi-minifi-cpp-1.26.02/bin/minifi --docs /tmp/docs && find /tmp/docs -name '*.md'"
+docker run --rm --platform linux/amd64 minifi-test:latest \\
+cat /tmp/docs/PROCESSORS.md | grep "##"
+cat /tmp/docs/PROCESSORS.md
+docker run --rm --platform linux/amd64 minifi-test:latest \\
+/bin/sh -c "/opt/minifi/nifi-minifi-cpp-1.26.02/bin/minifi --docs /tmp/docs && grep '##' /tmp/docs/PROCESSORS.md"
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest --overwrite
+kubectl delete pod -l app=minifi-test
+kubectl logs minifi-test-8469b4888d-4mdrb
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest --overwrite
+kubectl patch deployment minifi-test -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"date\":\"$(date +%s)\"}} \}} \}"
+kubectl delete -f minifi-test.yaml
+minikube image rm minifi-test:latest
+docker rmi -f minifi-test:latest
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+minikube image load minifi-test:latest
+kubectl apply -f minifi-test.yaml
+kubectl logs minifi-test-5886b5cbb-c6vns
+kubectl delete -f minifi-test.yaml
+minikube image rm minifi-test:latest || true
+eval $(minikube docker-env)
+docker rmi -f minifi-test:latest || true
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+minikube image build -t minifi-test:latest .
+docker login container.repo.cloudera.com
+minikube image build -t minifi-test:latest .
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+minikube image build -t minifi-test:latest .
+kubectl delete deployment minifi-test --ignore-not-found\
+kubectl delete pod -l app=minifi-test --force --grace-period=0
+eval $(minikube docker-env)
+docker login container.repo.cloudera.com
+docker rmi -f minifi-test:latest || true
+docker builder prune -a -f
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+kubectl apply -f minifi-test.yaml
+kubectl logs minifi-test-5886b5cbb-nht9p
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .\
+kubectl delete pod -l app=minifi-test --force --grace-period=0
+kubectl delete deployment minifi-test --force --grace-period=0\
+kubectl delete service minifi-test-service --ignore-not-found
+docker rmi -f minifi-test:latest || true\
+docker builder prune -a -f
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+kubectl apply -f minifi-test.yaml
+kubectl logs minifi-test-5886b5cbb-s6hsg 
+cat <<EOF > config.yml\
+Flow Controller:\
+  name: MiNiFi Integration Test\
+\
+Controller Services:\
+- name: K8sService\
+  id: 489c62c3-2d12-11f1-baac-62f0ccd85bcd\
+  class: KubernetesControllerService\
+  Properties:\
+    Namespace: default\
+\
+Processors:\
+- name: ListenHTTP\
+  id: 489c62c4-2d12-11f1-baac-62f0ccd85bcd\
+  class: ListenHTTP\
+  Properties:\
+    Listening Port: 8080\
+\
+- name: K8sTest\
+  id: 489c62c5-2d12-11f1-baac-62f0ccd85bcd\
+  class: CollectKubernetesPodMetrics\
+  Properties:\
+    Kubernetes Controller Service: K8sService\
+\
+- name: PublishKafka\
+  id: 489c62c6-2d12-11f1-baac-62f0ccd85bcd\
+  class: PublishKafka\
+  Properties:\
+    Known Brokers: my-cluster-kafka-bootstrap.cld-streaming.svc:9092\
+    Topic Name: test-minifi\
+    Batch Size: '10'\
+\
+- name: DebugLog\
+  id: 489c62c7-2d12-11f1-baac-62f0ccd85bcd\
+  class: PutFile\
+  Properties:\
+    Directory: /tmp/minifi-test-output\
+\
+Connections:\
+- name: HttpToK8s\
+  id: 489c62c8-2d12-11f1-baac-62f0ccd85bcd\
+  source name: ListenHTTP\
+  destination name: K8sTest\
+  source relationship name: success\
+- name: K8sToKafka\
+  id: 489c62c9-2d12-11f1-baac-62f0ccd85bcd\
+  source name: K8sTest\
+  destination name: PublishKafka\
+  source relationship name: success\
+- name: K8sToLog\
+  id: 489c62ca-2d12-11f1-baac-62f0ccd85bcd\
+  source name: K8sTest\
+  destination name: DebugLog\
+  source relationship name: success\
+\
+Remote Processing Groups: []\
+EOF
+kubectl delete deployment minifi-test --force --grace-period=0\
+kubectl delete service minifi-test-service --ignore-not-found
+eval $(minikube docker-env)
+docker rmi -f minifi-test:latest || true\
+docker builder prune -a -f
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+kubectl apply -f minifi-test.yaml
+kubectl logs minifi-test-5886b5cbb-9xclq
+kubectl delete deployment minifi-test --force --grace-period=0\
+kubectl delete service minifi-test-service --ignore-not-found
+docker rmi -f minifi-test:latest || true\
+docker builder prune -a -f
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+kubectl apply -f minifi-test.yaml
+kubectl delete deployment minifi-test --force --grace-period=0\
+kubectl delete service minifi-test-service --ignore-not-found
+kubectl apply -f minifi-test.yaml
+kubectl logs minifi-test-5886b5cbb-7xlkf
+kubectl delete deployment minifi-test --force --grace-period=0\
+kubectl delete service minifi-test-service --ignore-not-found
+docker rmi -f minifi-test:latest || true\
+docker builder prune -a -f
+docker build --no-cache --platform linux/amd64 -t minifi-test:latest .
+kubectl apply -f minifi-test.yaml
+kubectl logs minifi-test-5886b5cbb-kvch7
+minikube service minifi-test-service --url
+kubectl exec -it deployment/minifi-test -- ls -lh /tmp/minifi-test-output
+kubectl logs minifi-test-5886b5cbb-kvch7
+kubectl describe pod minifi-test-5886b5cbb-kvch7
+kubectl apply -f minifi-test.yaml
+kubectl describe pod minifi-test-6fbbbcd8f-pfjw9
+kubectl describe pod minifi-test-6fbbbcd8f-pfjw9
+minikube service minifi-test-service --url
+exit
