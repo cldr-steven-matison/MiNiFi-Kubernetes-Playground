@@ -1,7 +1,6 @@
-# MiNiFi Kubernetes Playground
+# MiNiFi-Kubernetes-Playground
 This reposistory is used in testing minifi with [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/).
 
-# MiNiFi-Kubernetes-Playground
 
 This guide provides a definitive, "Clean Slate" workflow for iterating on **Apache MiNiFi C++ (v1.26.02)** within a **Minikube** environment on **macOS**.   It was generated after working with Gemini on the Grok plan file [MiNiFi CFM MiniKube](minifi-cfm-minikube-grok.md).  The terminal history and output is archived in the [history](/history) folder.
 
