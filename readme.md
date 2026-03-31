@@ -1,4 +1,4 @@
-# ClouderaStreamingOperators
+# MiNiFi Kubernetes Playground
 This reposistory is used in testing minifi with [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/).
 
 # MiNiFi-Kubernetes-Playground
