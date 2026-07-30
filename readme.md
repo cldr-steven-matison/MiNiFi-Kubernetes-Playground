@@ -6,6 +6,8 @@ This guide provides a definitive, "Clean Slate" workflow for iterating on **Apac
 
 It eliminates common caching "ghosts" by building images directly inside the Minikube Docker daemon and ensures the MiNiFi C++ agent's strict YAML requirements are met.
 
+<!-- Folded into the Complete Guide to Edge Flow Management (DesktopShare) → guide/ch07-standalone-minifi-cpp-on-k8s.md (#31). This readme stays the runnable source; the chapter is the synthesized version. -->
+
 ---
 
 ## 1. The "Nuclear" Iteration Script
