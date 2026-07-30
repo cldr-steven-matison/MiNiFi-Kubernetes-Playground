@@ -1,0 +1,43 @@
+# Level 2 (EFM-managed) variant of the C++ flavor — issue #29.
+# Does NOT replace or modify the Level 1 plain open-source example
+# (Dockerfile / config.yml / minifi-test.yaml) — this is a separate,
+# additive deployment. Level 1 stays a self-contained, non-EFM demo of
+# stock MiNiFi C++; this pod is EFM Designer-managed instead, matching
+# how KubernetesPod (minifi-agent-k8s-gaming) is bootstrapped in the
+# main cld-streaming cluster.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minifi-test-efm-cpp
+  namespace: default
+  labels:
+    app: minifi-test-efm-cpp
+spec:
+  containers:
+  - name: minifi
+    image: ubuntu:22.04
+    command: ["/bin/bash", "-c"]
+    args:
+    - |
+      apt-get update && apt-get install -y curl tar python3 python3-pip python3-venv
+      ln -s /usr/bin/python3 /usr/bin/python || true
+      # health-poll EFM before the deployer curl (cold-start race, see
+      # skills/nifi-and-ai/references/minifi-efm.md #3)
+      for i in $(seq 1 60); do
+        curl -sf http://efm.cld-streaming.svc:10090/efm/actuator/health && break
+        sleep 5
+      done
+      curl -L \
+       -d agentClass=PlaygroundCpp \
+       -d agentIdentifier=c7aae80c-5d37-4e9b-bfa8-0877e0355f64 \
+       -d agentType=cpp \
+       -d agentVersion=1.26.02 \
+       -d autoConfigureSecurity=false \
+       -d baseUrl=http%3A%2F%2Fefm.cld-streaming.svc%3A10090%2Fefm%2Fapi \
+       -d hbPeriod=5000 \
+       -d osArch=linux \
+       -d serviceName=minifi \
+       -d serviceUser=root \
+       -d trustSelfSignedCertificates=false \
+       http://efm.cld-streaming.svc:10090/efm/api/agent-deployer/script | bash -
+      tail -f /dev/null

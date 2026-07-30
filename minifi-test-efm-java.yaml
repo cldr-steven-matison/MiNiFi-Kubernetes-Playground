@@ -1,0 +1,42 @@
+# Level 2 (EFM-managed) variant of the Java flavor — issue #29.
+# Does NOT replace or modify the Level 1 plain open-source example
+# (Dockerfile.java / config-java.yml / minifi-test-java.yaml) — this is
+# a separate, additive deployment. Level 1 stays a self-contained,
+# non-EFM demo of stock MiNiFi Java; this pod is EFM Designer-managed
+# instead, matching how KubernetesPodJava (minifi-agent-k8s-java) is
+# bootstrapped in the main cld-streaming cluster.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minifi-test-efm-java
+  namespace: default
+  labels:
+    app: minifi-test-efm-java
+spec:
+  containers:
+  - name: minifi
+    image: ubuntu:22.04
+    command: ["/bin/bash", "-c"]
+    args:
+    - |
+      apt-get update && apt-get install -y curl tar openjdk-21-jre-headless ca-certificates sudo
+      # health-poll EFM before the deployer curl (cold-start race, see
+      # skills/nifi-and-ai/references/minifi-efm.md #3)
+      for i in $(seq 1 60); do
+        curl -sf http://efm.cld-streaming.svc:10090/efm/actuator/health && break
+        sleep 5
+      done
+      curl -L \
+       -d agentClass=PlaygroundJava \
+       -d agentIdentifier=a08533e6-c8da-408e-8412-34a999375463 \
+       -d agentType=java \
+       -d agentVersion=2.24.08.0-19 \
+       -d autoConfigureSecurity=false \
+       -d baseUrl=http%3A%2F%2Fefm.cld-streaming.svc%3A10090%2Fefm%2Fapi \
+       -d hbPeriod=5000 \
+       -d osArch=linux \
+       -d serviceName=minifi \
+       -d serviceUser=root \
+       -d trustSelfSignedCertificates=false \
+       http://efm.cld-streaming.svc:10090/efm/api/agent-deployer/script | bash -
+      tail -f /dev/null

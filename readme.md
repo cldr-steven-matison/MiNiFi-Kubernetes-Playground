@@ -444,3 +444,25 @@ Field-verified end-to-end 2026-07-29 on this playground's own Minikube cluster (
 reference in `config.yml` targets via `cld-streaming`): pod `minifi-test-java-*` reached `1/1
 Running`, a `POST /contentListener` returned `200`, and the exact JSON body landed in
 `/tmp/minifi-test-output/<uuid>` inside the pod.
+
+## 7. Level 2 — EFM-managed variant (both flavors)
+
+Everything above (Levels 1–6) is a self-contained, non-EFM demo of stock open-source MiNiFi —
+intentionally left as-is, no EFM dependency. This section adds a separate, additive **Level 2**:
+an EFM-managed variant of each flavor, deployed alongside the Level 1 pods without modifying any
+Level 1 file.
+
+`minifi-test-efm-cpp.yaml` and `minifi-test-efm-java.yaml` are bare pods — no custom Docker image,
+just a plain `ubuntu:22.04` base that installs prerequisites and runs EFM's own
+`agent-deployer/script` at container startup, registering with EFM as agent classes `PlaygroundCpp`
+and `PlaygroundJava` respectively:
+
+```bash
+kubectl apply -f minifi-test-efm-cpp.yaml
+kubectl apply -f minifi-test-efm-java.yaml
+```
+
+Both target the same cluster/namespace as Levels 1–6 and reach EFM via ordinary cluster-internal
+DNS (`efm.cld-streaming.svc:10090`), since this playground's Minikube cluster and the
+`cld-streaming` cluster EFM runs in are the same cluster. Full build story, API contract used, and
+field-verification details: DesktopShare's `minifi-playground-efm-level2.md`.
