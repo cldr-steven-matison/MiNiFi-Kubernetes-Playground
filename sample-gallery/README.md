@@ -89,6 +89,29 @@ dedicated artifacts gets its own subdir under `sample-gallery/`.
 
 ---
 
+## Entry 3 — Custom Python Processors (C++ & Java, EFM-managed)
+
+- **Name:** `python-processors`
+- **Purpose:** author a *new processor type* in Python — loaded by the agent under its own name,
+  wired like any stock processor. **Not** `ExecuteScript`. Two runnable recipes: function-style on
+  C++ and class-style (py4j) on Java.
+- **Agent:** MiNiFi **C++** `1.26.02` (proven arm64 / x86_64 / Windows MSI / Jetson) and MiNiFi
+  **Java** CEM `2.24.08.0-19` (py4j) — both EFM-managed.
+- **Shape:** `ListenHTTP → EdgeTagger|EdgeJavaTagger → LogAttribute`.
+- **Files:** [`python-processors/`](python-processors/) — per-recipe `.py`, the properties /
+  `bootstrap.conf` snippet, the published EFM flow export, and (Java) a one-`apply` disposable
+  agent pod. Full scenario doc: [`python-processors/README.md`](python-processors/README.md).
+- **The unlock worth lifting:** on **Java**, Python is gated by `nifi.python.command`, which must
+  be set in **`bootstrap.conf`** (MiNiFi-Java regenerates `minifi.properties` from it every start;
+  a direct edit is wiped, and the C2 property-push is denylisted) *and* needs a `python3` added to
+  the image. On **C++**, deliver the `.py` as an EFM Resource into the asset dir (function-style
+  only).
+- **Status:** ✅ field-validated end-to-end 2026-08-04 (all 6 platform legs; Java on a disposable
+  minikube agent, 3/3 POSTs, no drops). Chapter:
+  [Ch6](https://github.com/cldr-steven-matison/DesktopShare/blob/main/guide/ch06-minifi-custom-python-processors.md).
+
+---
+
 ## Pending entries (harvest as each chapter validates)
 
 These are the candidates named in the Ch18 plan and elsewhere in the guide. Each becomes a full
