@@ -99,16 +99,14 @@ dedicated artifacts gets its own subdir under `sample-gallery/`.
   **Java** CEM `2.24.08.0-19` (py4j) — both EFM-managed.
 - **Shape:** `ListenHTTP → EdgeTagger|EdgeJavaTagger → LogAttribute`.
 - **Files:** [`python-processors/`](python-processors/) — per-recipe `.py`, the properties /
-  `bootstrap.conf` snippet, the published EFM flow export, and (Java) a one-`apply` disposable
-  agent pod. Full scenario doc: [`python-processors/README.md`](python-processors/README.md).
+  `bootstrap.conf` snippet, the exported EFM flow, and (Java) a one-`apply` agent pod. Full recipe:
+  [`python-processors/README.md`](python-processors/README.md).
 - **The unlock worth lifting:** on **Java**, Python is gated by `nifi.python.command`, which must
   be set in **`bootstrap.conf`** (MiNiFi-Java regenerates `minifi.properties` from it every start;
   a direct edit is wiped, and the C2 property-push is denylisted) *and* needs a `python3` added to
   the image. On **C++**, deliver the `.py` as an EFM Resource into the asset dir (function-style
   only).
-- **Status:** ✅ field-validated end-to-end 2026-08-04 (all 6 platform legs; Java on a disposable
-  minikube agent, 3/3 POSTs, no drops). Chapter:
-  [Ch6](https://github.com/cldr-steven-matison/DesktopShare/blob/main/guide/ch06-minifi-custom-python-processors.md).
+- **Status:** ✅ field-validated (C++ arm64 / x86_64 / Windows MSI / Jetson, and CEM Java).
 
 ---
 
