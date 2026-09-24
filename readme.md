@@ -19,7 +19,7 @@ It eliminates common caching "ghosts" by building images directly inside the Min
 | Stock Kafka support | Yes (`PublishKafka` ships in the base image) | **No** — `nifi-minifi-java:latest`'s `minifi-standard-nar` does not bundle a Kafka NAR (field-verified 2026-07-29: no `*kafka*` jar anywhere under `lib/`). The Java example below is `ListenHTTP -> PutFile` only; Kafka publish would need a NAR drop-in, which isn't done in this playground yet. |
 | NodePort | 30080 | 30081 |
 
-<!-- Folded into the Complete Guide to Edge Flow Management (DesktopShare) → guide/ch07-standalone-minifi-cpp-on-k8s.md (#31). This readme stays the runnable source; the chapter is the synthesized version. -->
+<!-- Folded into the Complete Guide to Edge Flow Management (BrainShare) → guide/ch07-standalone-minifi-cpp-on-k8s.md (#31). This readme stays the runnable source; the chapter is the synthesized version. -->
 
 ---
 
@@ -465,4 +465,4 @@ kubectl apply -f minifi-test-efm-java.yaml
 Both target the same cluster/namespace as Levels 1–6 and reach EFM via ordinary cluster-internal
 DNS (`efm.cld-streaming.svc:10090`), since this playground's Minikube cluster and the
 `cld-streaming` cluster EFM runs in are the same cluster. Full build story, API contract used, and
-field-verification details: DesktopShare's `minifi-playground-efm-level2.md`.
+field-verification details: BrainShare's `minifi-playground-efm-level2.md`.

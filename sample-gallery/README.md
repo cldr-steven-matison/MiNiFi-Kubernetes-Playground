@@ -1,14 +1,14 @@
 # Sample Gallery of MiNiFi Flows
 
 A curated, runnable set of MiNiFi flows you can lift and adapt. Each entry is a flow that has
-been **field-validated** somewhere in the [Complete Guide to Edge Flow Management](https://github.com/cldr-steven-matison/DesktopShare/blob/main/Complete%20Guide%20to%20Edge%20Flow%20Management.md)
+been **field-validated** somewhere in the [Complete Guide to Edge Flow Management](https://github.com/cldr-steven-matison/BrainShare/blob/main/Complete%20Guide%20to%20Edge%20Flow%20Management.md)
 work — this gallery collects and polishes them behind one consistent card, it doesn't invent new
 ones. A flow only earns a full card here **after its own chapter is ✅ field-validated**; the
 candidates that haven't cleared that bar yet are listed as pending slots at the bottom.
 
 Scope note: the golden-source plan for this gallery is
-[`minifi-sample-gallery.md`](https://github.com/cldr-steven-matison/DesktopShare/blob/main/minifi-sample-gallery.md)
-in DesktopShare (Ch18 of the guide). This `sample-gallery/` directory is the runnable home; that
+[`minifi-sample-gallery.md`](https://github.com/cldr-steven-matison/BrainShare/blob/main/minifi-sample-gallery.md)
+in BrainShare (Ch18 of the guide). This `sample-gallery/` directory is the runnable home; that
 doc is the plan.
 
 ## Card format
@@ -127,4 +127,4 @@ target shape is visible while the work lands.
 
 ---
 
-*Gallery scaffolded 2026-07-31 (FTF3XR2065, issue [#32](https://github.com/cldr-steven-matison/DesktopShare/issues/32)). Seeded with the two standalone flavors that are field-validated in this repo today; it accumulates as more chapters land.*
+*Gallery scaffolded 2026-07-31 (FTF3XR2065, issue [#32](https://github.com/cldr-steven-matison/BrainShare/issues/32)). Seeded with the two standalone flavors that are field-validated in this repo today; it accumulates as more chapters land.*
